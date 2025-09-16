@@ -23,7 +23,7 @@ async function registerUser(req, res) {
     {
       id: user._id,
     },
-    "88f623abf0f14fdd486e52136e813a2cac27acae"
+    process.env.JWT_SECRET
   );
   // jo data hamne diya hai use unique format mein dena hai, doosri chhez hai jwt secret
 
@@ -58,7 +58,7 @@ async function loginUser(req, res) {
     {
       id: user._id,
     },
-    "88f623abf0f14fdd486e52136e813a2cac27acae"
+    process.env.JWT_SECRET
   );
 
   res.cookie("token", token);
