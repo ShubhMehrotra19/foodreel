@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
@@ -17,8 +18,6 @@ const UserLogin = () => {
       email,
       password
     }, { withCredentials: true });
-
-    console.log(response.data);
 
     navigate("/"); // Redirect to home after login
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import '../../styles/create-food.css';
@@ -59,8 +60,6 @@ const CreateFood = () => {
         const response = await axios.post("http://localhost:3000/api/food", formData, {
             withCredentials: true,
         })
-
-        console.log(response.data);
         navigate("/"); // Redirect to home or another page after successful creation
         // Optionally reset
         // setName(''); setDescription(''); setVideoFile(null);
