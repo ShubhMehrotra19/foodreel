@@ -1,25 +1,40 @@
 const express = require("express");
-const router = express.Router();
-const multer = require("multer");
 const foodController = require("../controllers/food.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
+const router = express.Router();
+const multer = require("multer");
 
 const upload = multer({
   storage: multer.memoryStorage(),
 });
 
-// express ka server kisi bhi tareeke ka file nahi padh sakta, isiliye we use multer to have express understand it
-
-// POST : /api/food [protected]
+/* POST /api/food/ [protected]*/
 router.post(
   "/",
   authMiddleware.authFoodPartnerMiddleware,
-  upload.single("video"),
+  upload.single("mama"),
   foodController.createFood
 );
-// ye API ek food item ko add karega in the db, and only food partner can access this route, to isko protected rakhna zaroori hai
 
-// POST : /api/food [protected]
+/* GET /api/food/ [protected] */
 router.get("/", authMiddleware.authUserMiddleware, foodController.getFoodItems);
+
+router.post(
+  "/like",
+  authMiddleware.authUserMiddleware,
+  foodController.likeFood
+);
+
+router.post(
+  "/save",
+  authMiddleware.authUserMiddleware,
+  foodController.saveFood
+);
+
+router.get(
+  "/save",
+  authMiddleware.authUserMiddleware,
+  foodController.getSaveFood
+);
 
 module.exports = router;

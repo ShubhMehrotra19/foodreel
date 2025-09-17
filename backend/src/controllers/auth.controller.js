@@ -81,13 +81,15 @@ async function logoutUser(req, res) {
 }
 
 async function registerFoodPartner(req, res) {
-  const { name, email, password } = req.body;
+  const { name, email, password, phone, address, contactName } = req.body;
 
-  const isUserAlreadyExist = await foodPartnerModel.findOne({ email });
+  const isAccountAlreadyExists = await foodPartnerModel.findOne({
+    email,
+  });
 
-  if (isUserAlreadyExist) {
+  if (isAccountAlreadyExists) {
     return res.status(400).json({
-      message: "Food partner already exists",
+      message: "Food partner account already exists",
     });
   }
 
@@ -97,23 +99,29 @@ async function registerFoodPartner(req, res) {
     name,
     email,
     password: hashedPassword,
+    phone,
+    address,
+    contactName,
   });
 
   const token = jwt.sign(
     {
-      id: foodPartner._id, // FIXED: was using 'user._id' instead of 'foodPartner._id'
+      id: foodPartner._id,
     },
     process.env.JWT_SECRET
   );
 
   res.cookie("token", token);
+
   res.status(201).json({
     message: "Food partner registered successfully",
     foodPartner: {
-      // FIXED: changed from 'user' to 'foodPartner'
-      id: foodPartner._id,
+      _id: foodPartner._id,
       email: foodPartner.email,
-      name: foodPartner.name, // FIXED: was using 'fullname' which doesn't exist in foodPartner model
+      name: foodPartner.name,
+      address: foodPartner.address,
+      contactName: foodPartner.contactName,
+      phone: foodPartner.phone,
     },
   });
 }
