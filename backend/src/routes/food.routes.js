@@ -19,4 +19,7 @@ router.post(
 );
 // ye API ek food item ko add karega in the db, and only food partner can access this route, to isko protected rakhna zaroori hai
 
+// POST : /api/food [protected]
+router.get("/", authMiddleware.authUserMiddleware, foodController.getFoodItems);
+
 module.exports = router;
