@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
@@ -27,11 +28,9 @@ const FoodPartnerRegister = () => {
       address
     }, { withCredentials: true })
       .then(response => {
-        console.log(response.data);
         navigate("/create-food"); // Redirect to create food page after successful registration
       })
       .catch(error => {
-        console.error("There was an error registering!", error);
       });
   };
 

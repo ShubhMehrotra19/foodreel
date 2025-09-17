@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
@@ -17,8 +18,6 @@ const FoodPartnerLogin = () => {
       email,
       password
     }, { withCredentials: true });
-
-    console.log(response.data);
 
     navigate("/create-food"); // Redirect to create food page after login
 

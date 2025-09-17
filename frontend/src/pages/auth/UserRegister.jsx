@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
@@ -26,7 +27,7 @@ const UserRegister = () => {
             withCredentials: true
         })
 
-        console.log(response.data);
+     
 
         navigate("/")
 
