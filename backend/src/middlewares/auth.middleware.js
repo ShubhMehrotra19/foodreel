@@ -51,28 +51,18 @@ async function authUserMiddleware(req, res, next) {
 
   if (!token) {
     return res.status(401).json({
-      message: "please login first",
+      message: "Please login first",
     });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Fixed: userModelModel -> userModel
     const user = await userModel.findById(decoded.id);
-
-    // Check if user exists in database
-    if (!user) {
-      return res.status(401).json({
-        message: "User not found",
-      });
-    }
-
     req.user = user;
     next();
-  } catch (error) {
+  } catch (err) {
     return res.status(401).json({
-      message: "Invalid Token",
+      message: "Invalid token",
     });
   }
 }
